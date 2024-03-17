@@ -1,5 +1,4 @@
 .container  {
-    min-height: 68vh; /* TO-DO fix container flex  */
     width: 100%;
     display: flex;
     flex-direction: row;
@@ -28,4 +27,10 @@
 
 .image {
     margin-right: 150px;
+}
+
+@media (width <= 1200px) {
+    .container  {
+        flex-direction: column;
+    }
 }

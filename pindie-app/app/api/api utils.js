@@ -1,4 +1,4 @@
-const getData = async (url) => {
+export const getData = async (url) => {
     try {
         const response = await fetch(url)
         if (response.status !== 200) {
@@ -10,6 +10,7 @@ const getData = async (url) => {
         return error
     }
 }
+
 const normalizeDataObject = (obj) => {
     return {
         ...obj,
@@ -18,30 +19,30 @@ const normalizeDataObject = (obj) => {
     };
 };
 
-const normalizeData = (data) => {
+export const normalizeData = (data) => {
     return data.map((item) => {
         return normalizeDataObject(item)
     })
 }
 
-const isResponseOk = (response) => {
+export const isResponseOk = (response) => {
     return !(response instanceof Error);
 };
 
 
 
-const getNormalizedGamesDataByCategory = async (url, category) => {
+export const getNormalizedGamesDataByCategory = async (url, category) => {
     const data = await getData(`${url}?categories.name=${category}`);
 
     return isResponseOk(data) ? normalizeData(data) : data;
 };
 
-const getNormalizedGameDataById = async (url, id) => {
+export const getNormalizedGameDataById = async (url, id) => {
     const data = await getData(`${url}/${id}`);
     return isResponseOk(data) ? normalizeDataObject(data) : data;
 };
 
-const authorize = async (url, data) => {
+export const authorize = async (url, data) => {
     try {
         const res = await fetch(url, {
             method: "POST",
@@ -60,7 +61,7 @@ const authorize = async (url, data) => {
 
 
 
-const getMe = async (url, jwt) => {
+export const getMe = async (url, jwt) => {
     try {
         const response = await fetch(url, {
             method: "GET",
@@ -76,23 +77,23 @@ const getMe = async (url, jwt) => {
     }
 };
 
-const setJWT = (jwt) => {
+export const setJWT = (jwt) => {
     localStorage.setItem("jwt", jwt);
 };
 
-const getJWT = () => {
+export const getJWT = () => {
     return localStorage.getItem("jwt");
 };
 
-const removeJWT = () => {
+export const removeJWT = () => {
     localStorage.removeItem("jwt");
 };
 
-const checkIfUserVoted = (game, userId) => {
+export const checkIfUserVoted = (game, userId) => {
     return game.users.find((user) => user.id === userId);
 };
 
-const vote = async (url, jwt, usersArray) => {
+export const vote = async (url, jwt, usersArray) => {
     try {
         const response = await fetch(url, {
             method: 'PUT',
@@ -110,21 +111,4 @@ const vote = async (url, jwt, usersArray) => {
     } catch (error) {
         return error
     }
-}
-
-
-export {
-    getData,
-    normalizeDataObject,
-    normalizeData,
-    isResponseOk,
-    getNormalizedGamesDataByCategory,
-    getNormalizedGameDataById,
-    authorize,
-    getMe,
-    setJWT,
-    getJWT,
-    removeJWT,
-    checkIfUserVoted,
-    vote
 }

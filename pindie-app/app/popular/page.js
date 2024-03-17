@@ -1,15 +1,22 @@
+"use client"
 import CardList from "@/app/components/CardList/CardList";
-import {getGamesByCategory} from "@/app/data/data-utils";
-import {getNormalizedGamesDataByCategory} from "@/app/api/api utils";
 import {endpoints} from "@/app/api/config";
+import {useGetDataByCategory} from "@/app/api/api-hooks";
+import {Preloader} from "@/app/components/Preloader/Preloader";
 
-const popular = async () => {
-    const popularGames = await getNormalizedGamesDataByCategory(endpoints.games, "popular")
+
+function popular() {
+    const popularGames = useGetDataByCategory(endpoints.games, "popular");
     return (
-        <main>
-            <CardList data={popularGames} id="popular" title="Популярные"/>
+        <main className="main-inner">
+            {popularGames ? (
+                <CardList id="popular" title="Популярные" data={popularGames} />
+            ) : (
+                <Preloader/>
+            )}
         </main>
     );
-};
+}
+
 
 export default popular;

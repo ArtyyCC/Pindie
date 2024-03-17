@@ -8,14 +8,15 @@ import Link from "next/link";
 import LogoImg from "@/app/components/logo/LogoImg";
 import LogoLink from "@/app/components/logo/LogoLink"
 import { usePathname } from "next/navigation";
-import {getJWT, getMe, isResponseOk, removeJWT} from "@/app/api/api utils";
-import {endpoints} from "@/app/api/config";
+import {useStore} from '@/app/store/app-store';
+
 
 export const Header = () => {
     const pathname = usePathname();
-    const [isAuthorized, setIsAuthorized] = useState(false);
-    // handling of authorisation pop-up window
-
+    const authContext = useStore();
+    const handleLogout = () => {
+        authContext.logout();
+    };
     const [popupIsOpend,setPopupIsoppened] = useState(false)
     // function for opening the authorisation window
     const openPopup = () => {
@@ -24,23 +25,6 @@ export const Header = () => {
     // function for closing the authorisation window
     const closePopup = () => {
         setPopupIsoppened(false)
-    }
-    useEffect(() => {
-        const jwt = getJWT()
-        if (jwt) {
-            getMe(endpoints.me, jwt).then((userData) => {
-                if (isResponseOk(userData)) {
-                    setIsAuthorized(true)
-                } else {
-                    setIsAuthorized(false)
-                    removeJWT()
-                }
-            })
-        }
-    })
-    const hundleLogout = () => {
-        setIsAuthorized(false)
-        removeJWT()
     }
     return (
         <header className={Styles['header']}>
@@ -79,8 +63,8 @@ export const Header = () => {
                     </li>
                 </ul>
                 <div className={Styles['auth']}>
-                    {isAuthorized ?
-                        (<button onClick={hundleLogout} className={Styles['auth__button']}>Выйти</button>)
+                    {authContext.isAuth ?
+                        (<button onClick={handleLogout} className={Styles['auth__button']}>Выйти</button>)
                         :
                         (<button onClick={openPopup} className={Styles['auth__button']}>Войти</button>)
                     }
@@ -88,7 +72,7 @@ export const Header = () => {
             </nav>
             <Overlay isOpened={popupIsOpend} closePopup={closePopup}  />
             <Popup isOpened={popupIsOpend} closePopup={closePopup}>
-                <AuthForm  close={closePopup} setAuth={setIsAuthorized}/>
+                <AuthForm  close={closePopup}/>
             </Popup>
         </header>
     )

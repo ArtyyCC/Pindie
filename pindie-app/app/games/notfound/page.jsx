@@ -1,7 +1,6 @@
 "use client"
 import Styles from "./notfound.module.css";
 import Image from 'next/image';
-import Link from 'next/link';
 import {useRouter} from "next/navigation";
 
 const Page = () => {
