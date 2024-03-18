@@ -1,5 +1,5 @@
 "use client"
-import CardList from "@/app/components/CardList/CardList";
+import {CardsListSection} from "@/app/components/CardListSection/CardsListSection";
 import {endpoints} from "@/app/api/config";
 import {useGetDataByCategory} from "@/app/api/api-hooks";
 import {Preloader} from "@/app/components/Preloader/Preloader";
@@ -9,7 +9,7 @@ function Page() {
     return (
         <main className="main-inner">
             {pixelGames ? (
-                <CardList id="pixel" title="Пиксельные" data={pixelGames} />
+                <CardsListSection id="pixel" title="Пиксельные" data={pixelGames} />
             ) : (
                 <Preloader/>
             )}

@@ -1,14 +1,22 @@
-import CardList from "@/app/components/CardList/CardList";
-import {getGamesByCategory} from "@/app/data/data-utils";
+"use client"
+import {useGetDataByCategory} from "@/app/api/api-hooks";
+import {endpoints} from "@/app/api/config";
+import {Preloader} from "@/app/components/Preloader/Preloader";
+import {CardsListSection} from "@/app/components/CardListSection/CardsListSection";
 
-// API возращает пустой массив, пришлось оставить локальый репозиторий с данными
-const tds = () => {
-    const tdsGames = getGamesByCategory("TDS");
+
+function tds() {
+    const tdsGames = useGetDataByCategory(endpoints.games, "TDS");
     return (
-        <main>
-            <CardList data={tdsGames} id={"TDS"} title={"TDS"}/>
+        <main className="main-inner">
+            {tdsGames ? (
+                <CardsListSection id="TDS" title="TDS" data={tdsGames} />
+            ) : (
+                <Preloader/>
+            )}
         </main>
     );
-};
+}
+
 
 export default tds;

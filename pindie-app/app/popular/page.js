@@ -1,8 +1,8 @@
 "use client"
-import CardList from "@/app/components/CardList/CardList";
 import {endpoints} from "@/app/api/config";
 import {useGetDataByCategory} from "@/app/api/api-hooks";
 import {Preloader} from "@/app/components/Preloader/Preloader";
+import {CardsListSection} from "@/app/components/CardListSection/CardsListSection";
 
 
 function popular() {
@@ -10,7 +10,7 @@ function popular() {
     return (
         <main className="main-inner">
             {popularGames ? (
-                <CardList id="popular" title="Популярные" data={popularGames} />
+                <CardsListSection id="popular" title="Популярные" data={popularGames} />
             ) : (
                 <Preloader/>
             )}

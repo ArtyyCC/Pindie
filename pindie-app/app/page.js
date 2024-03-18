@@ -1,9 +1,10 @@
 "use client"
 import Banner from "@/app/components/Banner/Banner";
-import CardList from "@/app/components/CardList/CardList";
+import CardList from "@/app/components/CardListSection/CardList";
 import {useGetDataByCategory} from "@/app/api/api-hooks";
 import {endpoints} from "@/app/api/config";
 import {Preloader} from "@/app/components/Preloader/Preloader";
+import {CardsListSection} from "@/app/components/CardListSection/CardsListSection";
 
 function Home() {
     const popularGames = useGetDataByCategory(endpoints.games, "popular");
@@ -13,7 +14,7 @@ function Home() {
             <Banner/>
             {popularGames ?
                 (
-                    <CardList data={popularGames} id="popular" title="Популярные"/>
+                    <CardsListSection type="slider" id="popular" title="Популярные" data={popularGames} />
                 ) :
                 (
                     <Preloader/>
@@ -21,7 +22,7 @@ function Home() {
             }
             {newGames ?
                 (
-                    <CardList data={newGames} id="new" title="Новинки"/>
+                    <CardsListSection type="slider" id="new" title="Новинки" data={newGames} />
                 ) :
                 (
                     <Preloader/>

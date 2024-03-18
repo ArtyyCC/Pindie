@@ -1,5 +1,5 @@
 "use client"
-import CardList from "@/app/components/CardList/CardList";
+import {CardsListSection} from "@/app/components/CardListSection/CardsListSection";
 import {endpoints} from "@/app/api/config";
 import {useGetDataByCategory} from "@/app/api/api-hooks";
 import {Preloader} from "@/app/components/Preloader/Preloader";
@@ -11,7 +11,7 @@ function runners() {
     return (
         <main className="main-inner">
             {runnersGames ? (
-                <CardList id="runner" title="Ранеры" data={runnersGames} />
+                <CardsListSection id="runner" title="Ранеры" data={runnersGames} />
             ) : (
                 <Preloader/>
             )}
