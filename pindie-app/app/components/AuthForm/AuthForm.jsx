@@ -57,7 +57,7 @@ export const AuthForm = (props) => {
         <button className={Styles['form__reset']} type="reset">Очистить</button>
         <button className={Styles['form__submit']} type="submit">Войти</button>
       </div>
-        <Link onClick={location.reload} href="/me">Нет учётной записи? <span className={Styles['register_link']}>Зарегистрироваться</span></Link>
+        <Link onClick={location.reload} href="/register">Нет учётной записи? <span className={Styles['register_link']}>Зарегистрироваться</span></Link>
         {/*  reload фиксит отображение popup, я знаю, что так лучше делать не надо (   */}
     </form>
   ) 

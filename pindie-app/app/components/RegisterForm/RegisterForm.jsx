@@ -1,53 +1,48 @@
 
 import Styles from './RegisterForm.module.css';
-import {authorize, getMe, setJWT} from "@/app/api/api utils";
+import {register} from "@/app/api/api utils";
 import {endpoints} from "@/app/api/config";
 import {useEffect, useState} from "react";
 import {isResponseOk} from "@/app/api/api utils";
 import {useStore} from '@/app/store/app-store';
 
+
 export const RegisterForm = (props) => {
     const authContext = useStore();
-    const [authData, setAuthData] = useState({ identifier: "", password: "" });
     const [message, setMessage] = useState({ status: null, text: null });
+    const [registerData, setRegisterData] = useState( {
+        username: undefined,
+        email: undefined,
+        password: undefined
+    });
+    const handleInput = (e) => {
+        const newAuthData = registerData;
+        newAuthData[e.target.name] = e.target.value;
+        setRegisterData({ ...registerData, [e.target.name]: e.target.value });
+    };
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const userData = await authorize(endpoints.auth, authData);
+        console.log(registerData)
+        const userData = await register(endpoints.register, registerData);
         if(isResponseOk(userData)) {
-            authContext.login(userData.user, userData.jwt); // login из контекста
-            setMessage({ status: "success", text: "Вы авторизовались!" });
+            setMessage({ status: "success", text: "Вы зарегестрированы!" });
         } else {
-            setMessage({ status: "error", text: "Неверные почта или пароль" });
+            setMessage({ status: "error", text: "Возникла ошибка при создании учётной записи" });
         }
     };
-    const handleInput = (e) => {
-        const newAuthData = authData;
-        newAuthData[e.target.name] = e.target.value;
-        setAuthData({ ...authData, [e.target.name]: e.target.value });
-    }
-
-    useEffect(() => {
-        let timer;
-        if (authContext.user) {
-            timer = setTimeout(() => {
-                props.close();
-            }, 1000);
-        }
-        return () => clearTimeout(timer);
-    }, [authContext.user]);
-
+    console.log()
     return (
     <form onSubmit={handleSubmit} className={Styles['form']}>
       <h2 className={Styles['form__title']}>Регистрация</h2>
         <div className={Styles['form__fields']}>
             <label className={Styles['form__field']}>
                 <span className={Styles['form__field-title']}>Имя</span>
-                <input name={"password"} onInput={handleInput} className={Styles['form__field-input']} type="password"
+                <input name={"username"} onInput={handleInput} className={Styles['form__field-input']} type="text"
                        placeholder='Имя пользователя'/>
             </label>
             <label className={Styles['form__field']}>
                 <span className={Styles['form__field-title']}>Email</span>
-                <input name={"identifier"} onInput={handleInput} className={Styles['form__field-input']} type="email"
+                <input name={"email"} onInput={handleInput} className={Styles['form__field-input']} type="email"
                        placeholder="Ваша почта"/>
             </label>
             <label className={Styles['form__field']}>

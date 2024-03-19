@@ -59,6 +59,23 @@ export const authorize = async (url, data) => {
     }
 };
 
+export const register = async (url, data) => {
+    try {
+        const res = await fetch(url, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data),
+        });
+        if (res.status !== 200) {
+            throw new Error("Ошибка регистрации");
+        }
+        const result = await res.json();
+        return result;
+    } catch (error) {
+        return error;
+    }
+};
+
 
 
 export const getMe = async (url, jwt) => {

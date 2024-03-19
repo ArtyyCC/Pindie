@@ -44,7 +44,7 @@ export default function GamePage(props) {
         fetchData();
     }, []);
 
-    useEffect(() => { // Данные о пользователе получаем из контекста authContext.user
+    useEffect(() => {
         authContext.user && game ? setIsVoted(checkIfUserVoted(game, authContext.user.id)) : setIsVoted(false);
     }, [authContext.user, game]);
     useEffect(() => {

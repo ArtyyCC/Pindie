@@ -3,8 +3,8 @@ import { getJWT, setJWT, removeJWT, getMe } from '../api/api utils';
 import { endpoints } from '../api/config';
 
 export const useStore = create((set) => ({
-    isAuth: false,
-    user: null,
+    isAuth: null,
+    user: undefined,
     token: null,
     login: (user, token) => {
         set({ isAuth: true, user, token });
