@@ -7,14 +7,16 @@ import {AuthForm} from "@/app/components/AuthForm/AuthForm";
 import Link from "next/link";
 import LogoImg from "@/app/components/logo/LogoImg";
 import LogoLink from "@/app/components/logo/LogoLink"
-import { usePathname } from "next/navigation";
+import {usePathname, useRouter} from "next/navigation";
 import {useStore} from '@/app/store/app-store';
 
 
 export const Header = () => {
+    const router = useRouter()
     const pathname = usePathname();
     const authContext = useStore();
     const handleLogout = () => {
+        location.reload()
         authContext.logout();
     };
     const [popupIsOpend,setPopupIsoppened] = useState(false)

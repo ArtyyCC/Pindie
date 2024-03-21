@@ -3,26 +3,10 @@ import Styles from "./Game.module.css";
 import {useEffect, useState} from "react";
 import {useRouter} from "next/navigation";
 import {endpoints} from '@/app/api/config';
-import {checkIfUserVoted, getNormalizedGameDataById, isResponseOk} from "@/app/api/api utils";
+import {checkIfUserVoted, getNormalizedGameDataById, isResponseOk, vote} from "@/app/api/api utils";
 import {Preloader} from "@/app/components/Preloader/Preloader";
 import {useStore} from '@/app/store/app-store';
 
-// npm run dev
-// ЗАПУСКАЕМ
-// ░ГУСЯ░▄▀▀▀▄░РАБОТЯГИ░░
-// ▄███▀░◐░░░▌░░░░░░░
-// ░░░░▌░░░░░▐░░░░░░░
-// ░░░░▐░░░░░▐░░░░░░░
-// ░░░░▌░░░░░▐▄▄░░░░░
-// ░░░░▌░░░░▄▀▒▒▀▀▀▀▄
-// ░░░▐░░░░▐▒▒▒▒▒▒▒▒▀▀▄
-// ░░░▐░░░░▐▄▒▒▒▒▒▒▒▒▒▒▀▄
-// ░░░░▀▄░░░░▀▄▒▒▒▒▒▒▒▒▒▒▀▄
-// ░░░░░░▀▄▄▄▄▄█▄▄▄▄▄▄▄▄▄▄▄▀▄
-// ░░░░░░░░░░░▌▌░▌▌░░░░░
-// ░░░░░░░░░░░▌▌░▌▌░░░░░
-// ░░░░░░░░░▄▄▌▌▄▌▌░░░░░
-// Don't touch the magic code here
 
 export default function GamePage(props) {
     const authContext = useStore();
@@ -56,9 +40,9 @@ export default function GamePage(props) {
     }, [authContext.user, game]);
     const handleVote = async () => {
         const jwt = authContext.token
-        if (isVoted === false) {
+        if (!isVoted) {
             let usersIdArray = game.users.length
-                ? game.users.map((user) => authContext.user.id)
+                ? game.users.map((user) => user.id)
                 : [];
             usersIdArray.push(authContext.user.id);
             const response = await vote(
@@ -71,7 +55,7 @@ export default function GamePage(props) {
                 setGame(() => {
                     return {
                         ...game,
-                        users: [...game.users, authContext.user.id],
+                        users: [...response.users_permissions_users, authContext.user.id],
                     };
                 });
             }

@@ -14,7 +14,7 @@ const Page = () => {
     const authContext = useStore();
 
     const handleLogout = async () => {
-        settest(false)
+        setPreloaderVisible(false)
         authContext.logout();
         router.push("/")
     };
@@ -25,7 +25,7 @@ const Page = () => {
         if (authContext.user !== undefined) {
             setPreloaderVisible(true)
         }
-    }, [authContext.user])
+    }, [authContext.isAuth])
 
     return (
         <>
