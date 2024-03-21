@@ -1,4 +1,4 @@
-# Online catalogue of online games PINDIE (web application) 
+# Online catalogue of online games PINDIE (web application)
 
 This project is a catalogue site where users can find a variety of online games for entertainment and recreation.
 
@@ -8,7 +8,7 @@ This project is a catalogue site where users can find a variety of online games 
 - Ability to view game description, rating
 - Rating of games based on user ratings
 - Ability to play games directly on the platform
-- Account system 
+- Account system
 
 ## Technologies
 
@@ -24,7 +24,7 @@ The following technologies were used to develop this site:
 ## Installation
 
 1. Clone the repository to your local machine
-2. Install all ```npm i`` dependencies.
+2. Install all ```npm i``` dependencies.
 3. configure localhost in the ```package.json``` file.
 4. Run the project ```npm run "dev/build/test"```
 
