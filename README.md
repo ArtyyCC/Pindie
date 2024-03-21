@@ -25,8 +25,8 @@ The following technologies were used to develop this site:
 
 1. Clone the repository to your local machine
 2. Install all ```npm i`` dependencies.
-3. configure localhost in the ```package.json`` file.
-4. Run the project ```npm run "dev/build/test"``
+3. configure localhost in the ```package.json``` file.
+4. Run the project ```npm run "dev/build/test"```
 
 ## Contribute to the project
 
