@@ -1,6 +1,8 @@
 import { create } from 'zustand';
 import { getJWT, setJWT, removeJWT, getMe } from '../api/api utils';
 import { endpoints } from '../api/config';
+import {router} from "next/client";
+import {useRouter} from "next/navigation";
 
 export const useStore = create((set) => ({
     isAuth: null,

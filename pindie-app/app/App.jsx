@@ -22,9 +22,6 @@ export const App = (props) => {
     return(
         <>
             <Header />
-            { visibleProfile ? (<Link href="/me" className={"menu__link_profile"}>
-                Учётная запись
-            </Link>) : null }
             {props.children}
             <Footer />
         </>

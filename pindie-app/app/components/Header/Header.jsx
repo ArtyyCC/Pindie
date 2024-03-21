@@ -9,6 +9,7 @@ import LogoImg from "@/app/components/logo/LogoImg";
 import LogoLink from "@/app/components/logo/LogoLink"
 import {usePathname, useRouter} from "next/navigation";
 import {useStore} from '@/app/store/app-store';
+import Image from "next/image";
 
 
 export const Header = () => {
@@ -16,7 +17,6 @@ export const Header = () => {
     const pathname = usePathname();
     const authContext = useStore();
     const handleLogout = () => {
-        location.reload()
         authContext.logout();
     };
     const [popupIsOpend,setPopupIsoppened] = useState(false)
@@ -66,7 +66,16 @@ export const Header = () => {
                 </ul>
                 <div className={Styles['auth']}>
                     {authContext.isAuth ?
-                        (<button onClick={handleLogout} className={Styles['auth__button']}>Выйти</button>)
+                        (
+                            <Link  className={Styles['auth__button']} href={'/me'}>
+                                <Image
+                                    src={"/images/avatarPlaceHolder.png"}
+                                    alt={"Иконка перехода в профиль"}
+                                    width={150}
+                                    height={150}
+                                />
+                            </Link>
+                        )
                         :
                         (<button onClick={openPopup} className={Styles['auth__button']}>Войти</button>)
                     }

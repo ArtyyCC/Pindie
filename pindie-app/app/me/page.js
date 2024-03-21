@@ -12,7 +12,6 @@ const Page = () => {
     const [preloaderVisible, setPreloaderVisible] = useState(false);
     const router = useRouter()
     const authContext = useStore();
-
     const handleLogout = async () => {
         setPreloaderVisible(false)
         authContext.logout();
@@ -22,7 +21,7 @@ const Page = () => {
         router.push('/')
     }
     useEffect(() => {
-        if (authContext.user !== undefined) {
+        if (authContext.user !== undefined && authContext.user !== false) {
             setPreloaderVisible(true)
         }
     }, [authContext.isAuth])
