@@ -1,18 +1,18 @@
-# Каталог онлайн игр PINDIE
+# Online catalogue of online games PINDIE (web application) 
 
-Данный проект представляет собой сайт-каталог, где пользователи могут найти разнообразные онлайн игры для развлечения и отдыха.
+This project is a catalogue site where users can find a variety of online games for entertainment and recreation.
 
-## Особенности проекта
+## Project Features
 
-- Поиск игр по различным критериям (жанр и т.д)
-- Возможность просмотра описания игры, рейтинга
-- Рейтинг игр, составленный на основе оценок пользователей
-- Возможность сыграть прямо на платформе
-- Система учётных записей 
+- Search for games by various criteria (genre, etc.)
+- Ability to view game description, rating
+- Rating of games based on user ratings
+- Ability to play games directly on the platform
+- Account system 
 
-## Технологии
+## Technologies
 
-Для разработки данного сайта использовались следующие технологии:
+The following technologies were used to develop this site:
 
 - NEXT.JS
 - React
@@ -21,17 +21,17 @@
 - Zustand
 - Swiper
 
-## Установка
+## Installation
 
-1. Склонируйте репозиторий на локальную машину
-2. Установите все зависимости ```npm i```
-3. Настройте localhost в файле ```package.json```
-4. Запустите проект ```npm run "dev/build/test"```
+1. Clone the repository to your local machine
+2. Install all ```npm i`` dependencies.
+3. configure localhost in the ```package.json`` file.
+4. Run the project ```npm run "dev/build/test"``
 
-## Вклад в проект
+## Contribute to the project
 
-Если у вас есть предложения по улучшению проекта, не стесняйтесь делать pull request.
+If you have suggestions to improve the project, feel free to make a pull request.
 
-## Автор
+## Author
 
-Проект разработан Артёмом Медведевым в рамках курса Yandex Practicum -  JavaScript от Яндекса: с нуля до веб-разработчика
+The project was developed by Artyom Medvedev as part of the Yandex Practicum - JavaScript from Yandex: from zero to web developer course.
