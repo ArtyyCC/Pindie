@@ -1,3 +1,8 @@
+export const isResponseOk = (response) => {
+    return !(response instanceof Error);
+};
+
+
 export const getData = async (url) => {
     try {
         const response = await fetch(url)
@@ -25,17 +30,20 @@ export const normalizeData = (data) => {
     })
 }
 
-export const isResponseOk = (response) => {
-    return !(response instanceof Error);
-};
 
 
 
 export const getNormalizedGamesDataByCategory = async (url, category) => {
-    const data = await getData(`${url}?categories.name=${category}`);
-
-    return isResponseOk(data) ? normalizeData(data) : data;
-};
+    try {
+        const data = await getData(`${url}?categories.name=${category}`);
+        if (!data || !data.length) {
+            throw new Error('Нет игр в категории');
+        }
+        return isResponseOk(data) ? normalizeData(data) : data;
+    } catch (error) {
+        return error;
+    }
+}
 
 export const getNormalizedGameDataById = async (url, id) => {
     const data = await getData(`${url}/${id}`);
