@@ -18,7 +18,7 @@ const Card = (props) => {
                         Автор: <span className={Styles['card__accent']}>{props.devoloper}</span>
                     </p>
                     <p className={Styles['card__votes']}>
-                        Голосов на сайте: <span className={Styles['card__accent']}>{Array.isArray(props.users) && !props.users.length ? props.users.length : '0'}</span>
+                        Голосов на сайте: <span className={Styles['card__accent']}>{props.users.length}</span>
                     </p>
                 </div>
             </div>
