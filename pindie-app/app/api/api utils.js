@@ -137,3 +137,4 @@ export const vote = async (url, jwt, usersArray) => {
         return error
     }
 }
+

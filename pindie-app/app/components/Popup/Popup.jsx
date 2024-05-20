@@ -1,11 +1,13 @@
-"use client"
 import Styles from "./Popup.module.css";
 
 export const Popup = (props) => {
-    //from props we get a function that closes the authorisation window by changing styles
   return (
-    <div className={`${Styles["popup"]} ${props.isOpened && Styles["popup_is-opened"]}`}>
-      <button onClick={props.closePopup} className={Styles["close"]}>
+    <div
+      className={`${Styles["popup"]} ${
+        props.isOpened && Styles["popup_is-opened"]
+      }`}
+    >
+      <button className={Styles["close"]} onClick={() => props.close()}>
         <svg
           className={Styles["close-icon"]}
           xmlns="http://www.w3.org/2000/svg"

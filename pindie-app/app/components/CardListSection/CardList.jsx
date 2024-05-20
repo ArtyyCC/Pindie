@@ -1,5 +1,5 @@
 import Styles from "./CardsListSection.module.css";
-import Card from "@/app/components/Card/Card";
+import {Card} from "@/app/components/Card/Card";
 import Link from "next/link";
 
 const CardList = (props) => {

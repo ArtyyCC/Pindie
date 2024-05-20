@@ -1,30 +1,32 @@
-"use client"
+'use client'
 import Image from "next/image";
-import Styles from "./aboutme.module.css"
-import {useStore} from "@/app/store/app-store";
-import { useRouter } from 'next/navigation'
-import {checkIfUserVoted, getMe} from "@/app/api/api utils";
+import Styles from "./aboutme.module.css";
+import { useStore } from "@/app/store/app-store";
+import {useRouter} from 'next/router';
 import {useEffect, useState} from "react";
-import {endpoints} from "@/app/api/config";
-import {Preloader} from "@/app/components/Preloader/Preloader";
+import {Preloader} from "../components/Preloader/Preloader";
+import dynamic from 'next/dynamic'
 
-const Page = () => {
+function Me() {
     const [preloaderVisible, setPreloaderVisible] = useState(false);
-    const router = useRouter()
+    const router = useRouter();
     const authContext = useStore();
+
     const handleLogout = async () => {
-        setPreloaderVisible(false)
+        setPreloaderVisible(false);
         authContext.logout();
-        router.push("/")
+        router.push("/");
     };
-    if (authContext.isAuth === false) {
-        router.push('/')
-    }
+
     useEffect(() => {
         if (authContext.user !== undefined && authContext.user !== false) {
-            setPreloaderVisible(true)
+            setPreloaderVisible(true);
         }
-    }, [authContext.isAuth])
+    }, [authContext.isAuth]);
+
+    if (authContext.isAuth === false) {
+        router.push('/');
+    }
 
     return (
         <>
@@ -67,10 +69,11 @@ const Page = () => {
                 </main>
             ) : (
                 <Preloader/>
-            )
-            }
+            )}
         </>
     );
-};
+}
 
-export default Page;
+export default dynamic(() => Promise.resolve(Me), {
+    ssr: false
+})

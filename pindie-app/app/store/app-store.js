@@ -1,12 +1,10 @@
 import { create } from 'zustand';
-import { getJWT, setJWT, removeJWT, getMe } from '../api/api utils';
+import { getJWT, setJWT, removeJWT, getMe } from '@/app/api/api utils';
 import { endpoints } from '../api/config';
-import {router} from "next/client";
-import {useRouter} from "next/navigation";
 
 export const useStore = create((set) => ({
-    isAuth: null,
-    user: undefined,
+    isAuth: false,
+    user: null,
     token: null,
     login: (user, token) => {
         set({ isAuth: true, user, token });
@@ -21,11 +19,11 @@ export const useStore = create((set) => ({
         if (jwt) {
             const user = await getMe(endpoints.me, jwt);
             if (user) {
-                set({ isAuth: true, user, token: jwt });
-                setJWT(jwt);
+              set({ isAuth: true, user, token: jwt });
+              setJWT(jwt);
             } else {
-                set({ isAuth: false, user: null, token: null });
-                removeJWT();
+              set({ isAuth: false, user: null, token: null });
+              removeJWT();
             }
         } else {
             set({ isAuth: false, user: null, token: null });
