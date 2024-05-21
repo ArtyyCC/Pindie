@@ -1,6 +1,7 @@
 import Styles from "./Card.module.css";
 
 export const Card = (props) => {
+  console.log(props)
   return (
     <article className={Styles["card"]}>
       <img src={props.image} alt="" className={Styles["card__image"]} />

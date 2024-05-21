@@ -14,5 +14,9 @@
     "react-dom": "^18",
     "swiper": "^11.0.7",
     "zustand": "^4.5.2"
+  },
+  "devDependencies": {
+    "eslint": "8.57.0",
+    "eslint-config-next": "14.2.3"
   }
 }

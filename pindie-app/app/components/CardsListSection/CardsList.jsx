@@ -3,6 +3,7 @@ import { Card } from "../Card/Card";
 import Styles from "./CardsListSection.module.css";
 
 export const CardsList = (props) => {
+  console.log(props)
   return (
     <ul className={Styles["cards-list"]}>
       {props.data.map((item) => {
