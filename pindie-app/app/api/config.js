@@ -1,4 +1,4 @@
-export const BASE_URL = 'http://localhost:3010/api';
+export const BASE_URL = 'https://notartya-api.nomoredomainswork.ru/api';
 
 export const endpoints = {
     games: `${BASE_URL}/games`,
