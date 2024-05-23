@@ -1,3 +1,9 @@
+# Services (Мой бэкенд:)
+https://notartya-api.nomoredomainswork.ru - admin panel
+
+https://notartya-api.nomoredomainswork.ru/api - api
+
+
 # Online catalogue of online games PINDIE (web application)
 
 This project is a catalogue site where users can find a variety of online games for entertainment and recreation.
