@@ -2,6 +2,7 @@
 import Styles from './mePage.module.css';
 import {RegisterForm} from "@/app/components/RegisterForm/RegisterForm";
 import Image from "next/image";
+import dynamic from "next/dynamic";
 
 
 const Page = () => {
@@ -22,4 +23,6 @@ const Page = () => {
     );
 };
 
-export default Page;
+export default dynamic(() => Promise.resolve(Page), {
+    ssr: false,
+});

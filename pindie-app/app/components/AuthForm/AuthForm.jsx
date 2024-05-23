@@ -70,7 +70,7 @@ export const AuthForm = (props) => {
           Войти
         </button>
       </div>
-      <Link onClick={location.reload} href="/register">Нет учётной записи? <span className={Styles['register_link']}>Зарегистрироваться</span></Link>
+      <Link href="/register">Нет учётной записи? <span className={Styles['register_link']}>Зарегистрироваться</span></Link>
     </form>
   );
 };
