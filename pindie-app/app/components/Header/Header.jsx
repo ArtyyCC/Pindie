@@ -81,8 +81,8 @@ export const Header = () => {
                     }
                 </div>
             </nav>
-            <Overlay isOpened={popupIsOpend} closePopup={closePopup}  />
-            <Popup isOpened={popupIsOpend} closePopup={closePopup}>
+            <Overlay isOpened={popupIsOpend} close={closePopup}  />
+            <Popup isOpened={popupIsOpend} close={closePopup}>
                 <AuthForm  close={closePopup}/>
             </Popup>
         </header>
