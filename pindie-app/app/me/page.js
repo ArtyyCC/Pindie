@@ -2,16 +2,14 @@
 import Image from "next/image";
 import Styles from "./aboutme.module.css";
 import { useStore } from "@/app/store/app-store";
-import {useRouter} from 'next/router';
+import {usePathname, useRouter} from "next/navigation";
 import {useEffect, useState} from "react";
 import {Preloader} from "../components/Preloader/Preloader";
-import dynamic from 'next/dynamic'
 
-function Me() {
-    const [preloaderVisible, setPreloaderVisible] = useState(false);
+export default function Me() {
     const router = useRouter();
+    const [preloaderVisible, setPreloaderVisible] = useState(false);
     const authContext = useStore();
-
     const handleLogout = async () => {
         setPreloaderVisible(false);
         authContext.logout();
@@ -72,8 +70,4 @@ function Me() {
             )}
         </>
     );
-}
-
-export default dynamic(() => Promise.resolve(Me), {
-    ssr: false
-})
+};

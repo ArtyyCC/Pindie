@@ -11,10 +11,10 @@ const Page = () => {
                 <h1 className={Styles['textNormalize']}>Ваши запросы слишком абрастракты!</h1>
                 <p className={Styles['textNormalize']}>К сожалению, игра не найдена</p>
                 <p className={Styles['textNormalize']}>Хотите отправиться на главную страницу?</p>
-                <button className={'button'} onClick={() => router.push('/')}>Хочу!</button>
+                <button className={Styles['button']} onClick={() => router.push('/')}>Хочу!</button>
             </section>
-                <Image
-                    className={Styles['image']}
+            <Image
+                className={Styles['image']}
                     src="/images/notfoundimg.png"
                     width={500}
                     height={375}

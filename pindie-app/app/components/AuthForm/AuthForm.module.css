@@ -92,3 +92,9 @@
   opacity: .5;
   pointer-events: none;
 }
+
+
+.register_link {
+  display: flex;
+  justify-content: center;
+}

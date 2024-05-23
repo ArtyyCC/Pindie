@@ -5,6 +5,7 @@ import { endpoints } from "@/app/api/config";
 import { authorize } from "@/app/api/api utils";
 import { isResponseOk } from "@/app/api/api utils";
 import { useStore } from "@/app/store/app-store";
+import Link from 'next/link'
 
 export const AuthForm = (props) => {
   const authContext = useStore();
@@ -69,6 +70,7 @@ export const AuthForm = (props) => {
           Войти
         </button>
       </div>
+      <Link onClick={location.reload} href="/register">Нет учётной записи? <span className={Styles['register_link']}>Зарегистрироваться</span></Link>
     </form>
   );
 };
