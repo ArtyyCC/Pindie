@@ -6,6 +6,7 @@ export const useStore = create((set) => ({
     isAuth: false,
     user: null,
     token: null,
+    id: null,
     login: (user, token) => {
         set({ isAuth: true, user, token });
         setJWT(token);
@@ -19,7 +20,8 @@ export const useStore = create((set) => ({
         if (jwt) {
             const user = await getMe(endpoints.me, jwt);
             if (user) {
-              set({ isAuth: true, user: {...user, id: user._id}, token: jwt });
+                set({ isAuth: true, user: { ...user, id: user._id }, token: jwt, id: user._id });
+              console.log(user)
               setJWT(jwt);
             } else {
               set({ isAuth: false, user: null, token: null });
