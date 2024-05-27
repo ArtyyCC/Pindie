@@ -5,12 +5,12 @@ import {useRouter} from "next/navigation";
 import {endpoints} from '@/app/api/config';
 import {checkIfUserVoted, getNormalizedGameDataById, isResponseOk, vote} from "@/app/api/api utils";
 import {Preloader} from "@/app/components/Preloader/Preloader";
-import {useStore} from '@/app/store/app-store';
+import {useStore} from "@/app/store/app-store";
 
 
 export default function GamePage(props) {
-    const store = useStore();
-
+    const authContext = useStore();
+    console.log(authContext.user)
     const [isVoted, setIsVoted] = useState(false);
 
     const [preloaderVisible, setPreloaderVisible] = useState(true);
@@ -25,20 +25,30 @@ export default function GamePage(props) {
             );
             isResponseOk(game) ? setGame(game) : setGame(null);
             setPreloaderVisible(false);
-
+            console.log(checkIfUserVoted(`game, ${authContext.user.id}`));
         }
         fetchData();
     }, []);
+
     useEffect(() => {
-        store.user && game ? setIsVoted(checkIfUserVoted(game, store.user.id)) : setIsVoted(false);
-    }, [store.user, game]);
+        if (authContext.user !== null && game) {
+            try {
+                const isVoted = checkIfUserVoted(game, authContext.user);
+                setIsVoted(isVoted);
+            } catch (error) {
+                console.log("Error:", error);
+            }
+        } else {
+            setIsVoted(false);
+        }
+    }, []);
 
     const handleVote = async () => {
-        const jwt = store.token;
+        const jwt = authContext.token;
         let usersIdArray = game.users.length
             ? game.users.map((user) => user.id)
             : [];
-        usersIdArray.push(store.user.id);
+        usersIdArray.push(authContext.user.id);
         const response = await vote(
             `${endpoints.games}/${game.id}`,
             jwt,
@@ -48,7 +58,7 @@ export default function GamePage(props) {
             setGame(() => {
                 return {
                     ...game,
-                    users: [...game.users, store.user]
+                    users: [...game.users, authContext.user]
                 };
             });
             setIsVoted(true);
@@ -72,7 +82,7 @@ export default function GamePage(props) {
                         <div className={Styles["about__vote"]}>
                             <p className={Styles["about__vote-amount"]}>За игру уже проголосовали: <span
                                 className={Styles["about__accent"]}>{game.users.length}</span></p>
-                            <button onClick={handleVote} disabled={!store.isAuth || isVoted} className={`button ${Styles["about__vote-button"]}`}>{isVoted ? "Голос учтён" : "Голосовать"}</button>
+                            <button onClick={handleVote} disabled={!authContext.isAuth || isVoted} className={`button ${Styles["about__vote-button"]}`}>{isVoted ? "Голос учтён" : "Голосовать"}</button>
                         </div>
                     </section>
                 </>
