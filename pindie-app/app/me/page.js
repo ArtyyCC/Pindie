@@ -5,8 +5,8 @@ import { useStore } from "@/app/store/app-store";
 import {usePathname, useRouter} from "next/navigation";
 import {useEffect, useState} from "react";
 import {Preloader} from "../components/Preloader/Preloader";
-
-export default function Me() {
+import dynamic from 'next/dynamic'
+function Me() {
     const router = useRouter();
     const [preloaderVisible, setPreloaderVisible] = useState(false);
     const authContext = useStore();
@@ -71,3 +71,7 @@ export default function Me() {
         </>
     );
 };
+
+export default dynamic(() => Promise.resolve(Me), {
+    ssr: false
+})
